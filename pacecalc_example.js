@@ -25,14 +25,9 @@ var METERS_IN_YARD = METERS_IN_MILE / YARDS_IN_MILE;
  */
 function clearNums()
 {
+	$('.timeValue').val("");
 	clearCalcErrorHandling();
-	document.Calc.timeH.value=0;
-	document.Calc.timeM.value=0;
-	document.Calc.timeS.value=0;
-	document.Calc.distance.value=0;
-	document.Calc.paceH.value=0;
-	document.Calc.paceM.value=0;
-	document.Calc.paceS.value=0;
+
 }
 
 /*
@@ -128,149 +123,82 @@ function saveMyTime(){
 	console.warn("PRminutes" + $('#5kPRM').val());
 	var newPR;
 
-	console.warn($('#5kPRH').val());
+	var PRtimeH;
+	var PRtimeM;
+	var PRtimeS;
 
 	newPR = false;
 
 	if($('#distance').val() == 3.1){
-	if(hours> $('#5kPRH')){
+	
+	PRTimeH = $('#5kPRH');
+	PRTimeM = $('#5kPRM');
+	PRTimeS = $('#5kPRS');
+	PRRaceInfo = $('#5kRace');
+	}
+	if($('#distance').val() == 6.2){
+	
+	PRTimeH = $('#10kPRH');
+	PRTimeM = $('#10kPRM');
+	PRTimeS = $('#10kPRS');
+	PRRaceInfo = $('#10kRace');
+	}
+	if($('#distance').val() == 13.1){
+	
+	PRTimeH = $('#halfMarathonPRH');
+	PRTimeM = $('#halfMarathonPRM');
+	PRTimeS = $('#halfMarathonPRS');
+	PRRaceInfo = $('#halfMarathonRace');
+	}
+	if($('#distance').val() == 26.2){
+	
+	PRTimeH = $('#marathonPRH');
+	PRTimeM = $('#marathonPRM');
+	PRTimeS = $('#marathonPRS');
+	PRRaceInfo = $('#marathonRace');
+	}
+	
+	if(hours> PRTimeH.val()){
 		console.warn("in first if");
 		newPR = true;	
 	}
 
 	
-	if(hours == $('#5kPRH').val() && minutes< $('#5kPRM').val()){
+	if(hours == PRTimeH.val() && minutes< PRTimeM.val()){
 			newPR = true;
 			console.warn("in second if");
 	}	
 
-	if(hours == $('#5kPRH').val() && minutes == $('#5kPRM').val() && seconds < $('#5kPRS').val()){
+	if(hours == PRTimeH.val() && minutes == PRTimeM.val() && seconds < PRTimeS.val()){
 			newPR = true;
 			console.warn("in third if");
 	}	
 
-	if($('#5kPRH').val() == '' && $('#5kPRM').val() == '' && $('#5kPRS').val() == ''){
+	if(PRTimeH.val() == '' && PRTimeM.val() == '' && PRTimeS.val() == ''){
 	newPR = true;
 }
-
+console.warn()
+if($('#raceName').val() != "" && $('#raceMonth').val() != "" && $('#raceDay').val() != "" && $('#raceYear').val() != ""){
 	if(newPR == true){
-	console.warn("there is a new pr")
-	$('#5kRace').html(raceInfo);
-	$('#5kPRH').html(hours);
-	$('#5kPRH').val(hours);
-	$('#5kPRM').html(minutes);
-	$('#5kPRM').val(minutes);
-	$('#5kPRS').html(seconds);
-	$('#5kPRS').val(seconds);
+	PRRaceInfo.html(raceInfo);
+	PRTimeH.html(hours);
+	PRTimeH.val(hours);
+	PRTimeM.html(minutes);
+	PRTimeM.val(minutes);
+	PRTimeS.html(seconds);
+	PRTimeS.val(seconds);
 
+	$('#calcErrorHandling').css('color','blue');
 	$('#calcErrorHandling').html("Congratulations on a great 5k Personal Record!");
+
 }
 else{
 	alert("This is not a new PR. It will not be added");
 }
-
-}
-else if($('#distance').val() == 6.2){
-	if(hours> $('#10kPRH')){
-		newPR = true;	
-	}
-	
-	if(hours == $('#10kPRH').val() && minutes< $('#10kPRM').val()){
-			newPR = true;
-	}	
-
-	if(hours == $('#10kPRH').val() && minutes == $('#10kPRM').val() && seconds < $('#10kPRS').val()){
-			newPR = true;
-	}	
-
-	if($('#10kPRH').val() == '' && $('#10kPRM').val() == '' && $('#10kPRS').val() == ''){
-	newPR = true;
-}
-
-	if(newPR == true){
-	$('#10kRace').html(raceInfo);
-	$('#10kPRH').html(hours);
-	$('#10kPRH').val(hours);
-	$('#10kPRM').html(minutes);
-	$('#10kPRM').val(minutes);
-	$('#10kPRS').html(seconds);
-	$('#10kPRS').val(seconds);
-
-	$('#calcErrorHandling').html("Congratulations on a great 10k Personal Record!");
 }
 else{
-	alert("This is not a new PR. It will not be added");
-}
-
-}
-else if($('#distance').val() == 13.1){
-	if(hours> $('#halfMarathonPRH')){
-		newPR = true;	
-	}
-	
-	if(hours == $('#halfMarathonPRH').val() && minutes< $('#halfMarathonPRM').val()){
-			newPR = true;
-	}	
-
-	if(hours == $('#halfMarathonPRH').val() && minutes == $('#halfMarathonPRM').val() && seconds < $('#halfMarathonPRS').val()){
-			newPR = true;
-	}	
-
-	if($('#halfMarathonPRH').val() == '' && $('#halfMarathonPRM').val() == '' && $('#halfMarathonPRS').val() == ''){
-	newPR = true;
-}
-
-	if(newPR == true){
-	$('#halfMarathonRace').html(raceInfo);
-	$('#halfMarathonPRH').html(hours);
-	$('#halfMarathonPRH').val(hours);
-	$('#halfMarathonPRM').html(minutes);
-	$('#halfMarathonPRM').val(minutes);
-	$('#halfMarathonPRS').html(seconds);
-	$('#halfMarathonPRS').val(seconds);
-
-	$('#calcErrorHandling').html("Congratulations on a great Half Marathon Personal Record!");
-}
-else{
-	//$('#calcErrorHandling').alert("This is not a new PR. It will not be added");
-	alert("This is not a new PR. It will not be added");
-}
-
-
-}
-else if($('#distance').val() == 26.2){
-	if(hours> $('#marathonPRH')){
-		newPR = true;	
-	}
-	
-	if(hours == $('#marathonPRH').val() && minutes< $('#marathonPRM').val()){
-			newPR = true;
-	}	
-
-	if(hours == $('#marathonPRH').val() && minutes == $('#marathonPRM').val() && seconds < $('#marathonPRS').val()){
-			newPR = true;
-	}	
-
-	if($('#marathonPRH').val() == '' && $('#marathonPRM').val() == '' && $('#marathonPRS').val() == ''){
-	newPR = true;
-}
-
-	if(newPR == true){
-	$('#marathonRace').html(raceInfo);
-	$('#marathonPRH').html(hours);
-	$('#marathonPRH').val(hours);
-	$('#marathonPRM').html(minutes);
-	$('#marathonPRM').val(minutes);
-	$('#marathonPRS').html(seconds);
-	$('#marathonPRS').val(seconds);
-
-	$('#calcErrorHandling').html("Congratulations on a great Marathon Personal Record!");
-}
-else{
-	//$('#calcErrorHandling').alert("This is not a new PR. It will not be added");
-	alert("This is not a new PR. It will not be added");
-}
-
+	$('#calcErrorHandling').css('color','red');
+	$('#calcErrorHandling').html("Please add Race Name and Date");
 }
 }
 /*
@@ -303,6 +231,7 @@ function calculateErrorHandling()
 	
 
 	if($('#paceM').val()== ""){
+		$('#calcErrorHandling').css('color','red');
 		$('#calcErrorHandling').html("Invalid pace value. You must enter a value between 00:00:59 and 00:59:59");
 	}
 }
@@ -346,6 +275,97 @@ $('#calcWhat').on('change', function() {
   else if($('#calcWhat').val()==0){
   	disableTime();
   }
+  clearNums();
 });
+
+$('.numbersOnly').keypress(function (e){
+  var charCode = (e.which) ? e.which : e.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+});
+
+$('.minSec').on('change', function(){
+      if ($(this).val() < 0) $(this).val(0);
+      if ($(this).val() > 59) $(this).val(59);
+      
+});
+
+$('.timeValue').on('change', function(){
+      if($(this).val()<10){ 
+      	$(this).val(0+$(this).val());
+      }
+});
+
+$('.month').on('change', function(){
+      if ($(this).val() < 1) $(this).val(1);
+      if ($(this).val() > 12) $(this).val(12);
+      
+});
+
+$('.day').on('change', function(){
+      if ($(this).val() < 1) $(this).val(1);
+      if ($(this).val() > 31) $(this).val(31);
+      
+});
+
+$('.year').on('change', function(){
+      if ($(this).val() < 1900) $(this).val(1900);
+      if ($(this).val() > 2020) $(this).val(2020);
+      
+});
+
+$('.distance').on('change', function(){
+      clearNums();
+      
+});
+
+ $(document).ready(function() {
+    $('input[type!="button"][type!="submit"], select, textarea')
+         .val('')
+         .blur();
+
+    disableTime();
+});
+
+function clear5kPR(){
+	$('#5kRace').html("");
+	$('#5kPRH').html("");
+	$('#5kPRH').val("");
+	$('#5kPRM').html("");
+	$('#5kPRM').val("");
+	$('#5kPRS').html("");
+	$('#5kPRS').val("");
+}
+
+function clear10kPR(){
+	$('#10kRace').html("");
+	$('#10kPRH').html("");
+	$('#10kPRH').val("");
+	$('#10kPRM').html("");
+	$('#10kPRM').val("");
+	$('#10kPRS').html("");
+	$('#10kPRS').val("");
+}
+
+function clearHalfMarathonPR(){
+	$('#halfMarathonRace').html("");
+	$('#halfMarathonPRH').html("");
+	$('#halfMarathonPRH').val("");
+	$('#halfMarathonPRM').html("");
+	$('#halfMarathonPRM').val("");
+	$('#halfMarathonPRS').html("");
+	$('#halfMarathonPRS').val("");
+}
+
+function clearMarathonPR(){
+	$('#marathonRace').html("");
+	$('#marathonPRH').html("");
+	$('#marathonPRH').val("");
+	$('#marathonPRM').html("");
+	$('#marathonPRM').val("");
+	$('#marathonPRS').html("");
+	$('#marathonPRS').val("");
+}
 
 //-->

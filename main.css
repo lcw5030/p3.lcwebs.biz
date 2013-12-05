@@ -94,6 +94,8 @@ input[type=button]:active {
 /*-------------------------------------------------------------------------------------------------
 Layout
 -------------------------------------------------------------------------------------------------*/
+
+
 #wrapper {
 	width:960px;
 	margin:0px auto;
@@ -116,7 +118,7 @@ Layout
 table#certificate{
 	border:dotted;
 	background-color:#000066;
-	margin:20px;
+	margin:10px;
 	color:#FFFFFF;
 }
 
@@ -147,5 +149,30 @@ Card
 	color:red;
 }
 
+input.clearPRButton{
+	height:20px;
+	margin:0;
+	padding-top:0;
+	width:140px;
+
+
+}
+
+table.clearPRs{
+	margin-top: 100px;
+	margin-bottom:70px;
+	margin-right: 0;
+	margin-right: 0;
+	padding:0;
+}
+
+table.paceCalcTable{
+	border: 1;
+}
+
+input[type="text"]:disabled
+{
+background:#dddddd;
+} 
 
 
