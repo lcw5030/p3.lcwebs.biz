@@ -358,8 +358,13 @@ function saveMyTime() {
             $('#calcErrorHandling').css('color', 'blue');
             $('#calcErrorHandling').html("Congratulations on a great " + distance + " Personal Record!");
 
-        } else if (newPR == "equal") {
+        } else if(newPR == "equal") {
+            if($('.timeValue').val("")){
+                $('#calcErrorHandling').html("Please calculate a new pace or time before saving");
+            }
+            else{
             alert("You have already added this PR. Please clear the PR and re-add if you would like to change the race name and date");
+                }
         } else {
             alert("This is not a new PR. It will not be added");
         }
@@ -369,3 +374,4 @@ function saveMyTime() {
         $('#calcErrorHandling').html("Error adding new PR. PR must include race name and date");
     }
 }
+
